@@ -41,7 +41,7 @@ xcodebuild test \
   -enableCodeCoverage YES \
   -resultBundlePath TestResults-UI.xcresult
 
-echo "=== 3/4 Coverage check (unit + UI, >= ${COVERAGE_THRESHOLD:-90}%) ==="
+echo "=== 3/4 Coverage check (unit + UI, >= ${COVERAGE_THRESHOLD:-70}%) ==="
 ./ci/check-coverage.sh TestResults-Unit.xcresult TestResults-UI.xcresult
 
 echo "=== 4/4 Release build (only after tests passed) ==="
