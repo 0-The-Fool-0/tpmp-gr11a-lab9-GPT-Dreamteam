@@ -3,18 +3,17 @@
 //  BankAppTests
 //
 
+import CoreData
 import Testing
 @testable import BankApp
 
 @MainActor
 struct LoginViewModelTests {
     @Test func signInWithEmptyFieldsSetsError() {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
-        DataSeedService(context: context).seedIfNeeded()
+        let (persistence, _) = TestPersistence.makeSeeded()
         let session = SessionStore()
         let viewModel = LoginViewModel(
-            authService: AuthService(context: context),
+            authService: AuthService(context: persistence.container.viewContext),
             session: session
         )
 
@@ -25,12 +24,10 @@ struct LoginViewModelTests {
     }
 
     @Test func signInWithInvalidCredentialsSetsError() {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
-        DataSeedService(context: context).seedIfNeeded()
+        let (persistence, _) = TestPersistence.makeSeeded()
         let session = SessionStore()
         let viewModel = LoginViewModel(
-            authService: AuthService(context: context),
+            authService: AuthService(context: persistence.container.viewContext),
             session: session
         )
         viewModel.login = "elena.kuznetsova"
@@ -43,12 +40,10 @@ struct LoginViewModelTests {
     }
 
     @Test func signInTrimsLoginWhitespace() {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
-        DataSeedService(context: context).seedIfNeeded()
+        let (persistence, _) = TestPersistence.makeSeeded()
         let session = SessionStore()
         let viewModel = LoginViewModel(
-            authService: AuthService(context: context),
+            authService: AuthService(context: persistence.container.viewContext),
             session: session
         )
         viewModel.login = "  elena.kuznetsova  "
@@ -60,10 +55,9 @@ struct LoginViewModelTests {
     }
 
     @Test func faceIDTappedShowsAlert() {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
+        let persistence = TestPersistence.makeInMemory()
         let viewModel = LoginViewModel(
-            authService: AuthService(context: context),
+            authService: AuthService(context: persistence.container.viewContext),
             session: SessionStore()
         )
 
@@ -73,12 +67,10 @@ struct LoginViewModelTests {
     }
 
     @Test func signInWithValidCredentialsAuthenticatesUser() {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
-        DataSeedService(context: context).seedIfNeeded()
+        let (persistence, _) = TestPersistence.makeSeeded()
         let session = SessionStore()
         let viewModel = LoginViewModel(
-            authService: AuthService(context: context),
+            authService: AuthService(context: persistence.container.viewContext),
             session: session
         )
         viewModel.login = "elena.kuznetsova"

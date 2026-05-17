@@ -64,10 +64,13 @@ jobs:
             -scheme "$SCHEME" \
             -testPlan "$TEST_PLAN" \
             -only-test-configuration "Unit Tests" \
+            -only-testing:BankAppTests \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
             -enableCodeCoverage YES \
+            -parallel-testing-enabled NO \
+            -maximum-parallel-testing-workers 1 \
             -resultBundlePath TestResults-Unit.xcresult
 
       - name: Verify code coverage
@@ -81,6 +84,7 @@ jobs:
             -scheme "$SCHEME" \
             -testPlan "$TEST_PLAN" \
             -only-test-configuration "UI Tests" \
+            -only-testing:BankAppUITests \
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \

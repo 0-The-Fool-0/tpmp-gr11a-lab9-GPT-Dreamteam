@@ -9,8 +9,7 @@ import Testing
 
 struct DataSeedServiceTests {
     @Test func seedIfNeededPopulatesDatabaseOnce() throws {
-        let persistence = PersistenceController(inMemory: true)
-        let context = persistence.container.viewContext
+        let context = TestPersistence.makeInMemory().container.viewContext
         let seeder = DataSeedService(context: context)
 
         seeder.seedIfNeeded()

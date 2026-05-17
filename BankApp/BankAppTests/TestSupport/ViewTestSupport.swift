@@ -3,6 +3,7 @@
 //  BankAppTests
 //
 
+import CoreData
 import SwiftUI
 import UIKit
 @testable import BankApp
@@ -19,8 +20,8 @@ enum ViewTestSupport {
 
     @MainActor
     static func seededDependencies() -> (AppDependencies, SessionStore, UserSession) {
-        let (persistence, session) = InMemoryTestStack.makeSeeded()
-        let dependencies = AppDependencies(persistence: persistence)
+        let (controller, session) = TestPersistence.makeSeeded()
+        let dependencies = AppDependencies(persistence: controller)
         return (dependencies, SessionStore(), session)
     }
 }

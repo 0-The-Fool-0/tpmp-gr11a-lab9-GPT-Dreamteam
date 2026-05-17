@@ -3,6 +3,7 @@
 //  BankAppTests
 //
 
+import CoreData
 import Testing
 @testable import BankApp
 

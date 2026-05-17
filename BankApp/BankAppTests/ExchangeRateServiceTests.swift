@@ -3,12 +3,13 @@
 //  BankAppTests
 //
 
+import CoreData
 import Testing
 @testable import BankApp
 
 struct ExchangeRateServiceTests {
     @Test func fetchRatesReturnsEmptyWhenDatabaseIsEmpty() {
-        let persistence = PersistenceController(inMemory: true)
+        let persistence = TestPersistence.makeInMemory()
         let service = ExchangeRateService(context: persistence.container.viewContext)
 
         #expect(service.fetchRates().isEmpty)

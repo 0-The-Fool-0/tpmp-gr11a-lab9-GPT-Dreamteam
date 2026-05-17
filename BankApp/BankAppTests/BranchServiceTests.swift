@@ -3,12 +3,13 @@
 //  BankAppTests
 //
 
+import CoreData
 import Testing
 @testable import BankApp
 
 struct BranchServiceTests {
     @Test func fetchAllBranchesReturnsEmptyWithoutSeed() {
-        let persistence = PersistenceController(inMemory: true)
+        let persistence = TestPersistence.makeInMemory()
         let service = BranchService(context: persistence.container.viewContext)
 
         #expect(service.fetchAllBranches().isEmpty)

@@ -3,14 +3,14 @@
 //  BankAppTests
 //
 
+import Foundation
 import Testing
 @testable import BankApp
 
 @MainActor
 struct AppDependenciesTests {
     @Test func initWiresServicesAndSeedsOnFirstLaunch() {
-        let persistence = PersistenceController(inMemory: true)
-        let dependencies = AppDependencies(persistence: persistence)
+        let dependencies = AppDependencies(persistence: TestPersistence.makeInMemory())
 
         #expect(dependencies.authService.validate(login: "", password: "") == nil)
         #expect(dependencies.accountService.fetchVisibleAccounts(for: UUID()).isEmpty)
