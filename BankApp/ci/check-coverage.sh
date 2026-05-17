@@ -8,7 +8,7 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-THRESHOLD="${COVERAGE_THRESHOLD:-70"}
+THRESHOLD="${COVERAGE_THRESHOLD:-70}"
 JSON="$(mktemp)"
 MERGED_BUNDLE=""
 
