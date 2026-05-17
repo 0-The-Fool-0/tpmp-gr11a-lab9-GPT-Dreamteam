@@ -1,0 +1,134 @@
+# CI/CD для BankApp (iOS)
+# Порядок по заданию: сначала тесты, сборка — только после их успешного прохождения.
+# Ориентиры: https://sarunw.com/posts/github-actions-for-ios-projects/
+#            https://github.com/Apple-Actions/Example-iOS
+
+name: iOS CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  PROJECT: BankApp.xcodeproj
+  SCHEME: BankApp
+  TEST_PLAN: BankApp
+  COVERAGE_THRESHOLD: "90"
+
+jobs:
+  test:
+    name: Test (Unit + UI)
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: BankApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Cache DerivedData
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: derived-${{ runner.os }}-${{ hashFiles('BankApp/**/*.swift', 'BankApp/**/*.xctestplan') }}
+          restore-keys: |
+            derived-${{ runner.os }}-
+
+      - name: Resolve simulator
+        id: simulator
+        run: |
+          DEVICE=$(xcrun simctl list devices available | grep -E 'iPhone (16|15|14)' | grep -v unavailable | head -1 | sed -E 's/^[[:space:]]*([^(]+)\(.*/\1/' | xargs)
+          if [ -z "$DEVICE" ]; then
+            echo "No suitable iPhone simulator found"
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "device=$DEVICE" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $DEVICE"
+
+      - name: Run Unit Tests (Test Plan — Unit Tests)
+        run: |
+          rm -rf TestResults-Unit.xcresult
+          xcodebuild test \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -testPlan "$TEST_PLAN" \
+            -only-test-configuration "Unit Tests" \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            -enableCodeCoverage YES \
+            -resultBundlePath TestResults-Unit.xcresult
+
+      - name: Verify code coverage
+        run: ./ci/check-coverage.sh TestResults-Unit.xcresult
+
+      - name: Run UI Tests (Test Plan — UI Tests)
+        run: |
+          rm -rf TestResults-UI.xcresult
+          xcodebuild test \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -testPlan "$TEST_PLAN" \
+            -only-test-configuration "UI Tests" \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            -resultBundlePath TestResults-UI.xcresult
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            BankApp/TestResults-Unit.xcresult
+            BankApp/TestResults-UI.xcresult
+          if-no-files-found: ignore
+
+  build:
+    name: Build (after tests)
+    runs-on: macos-latest
+    needs: test
+    defaults:
+      run:
+        working-directory: BankApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Resolve simulator
+        id: simulator
+        run: |
+          DEVICE=$(xcrun simctl list devices available | grep -E 'iPhone (16|15|14)' | grep -v unavailable | head -1 | sed -E 's/^[[:space:]]*([^(]+)\(.*/\1/' | xargs)
+          echo "device=$DEVICE" >> "$GITHUB_OUTPUT"
+
+      - name: Build Release for iOS Simulator
+        run: |
+          xcodebuild build \
+            -project "$PROJECT" \
+            -scheme "$SCHEME" \
+            -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload build products
+        uses: actions/upload-artifact@v4
+        with:
+          name: BankApp-simulator-build
+          path: ~/Library/Developer/Xcode/DerivedData/**/Build/Products/Release-iphonesimulator/BankApp.app
+          if-no-files-found: warn
