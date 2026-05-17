@@ -1,0 +1,72 @@
+{
+  "configurations" : [
+    {
+      "id" : "A1B2C3D4-0001-4000-8000-000000000001",
+      "name" : "Unit Tests",
+      "options" : {
+        "codeCoverage" : true,
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:BankApp.xcodeproj",
+          "identifier" : "999BA88A2FB865D900D242D7",
+          "name" : "BankApp"
+        }
+      },
+      "testTargets" : [
+        {
+          "parallelizable" : false,
+          "target" : {
+            "containerPath" : "container:BankApp.xcodeproj",
+            "identifier" : "999BA89C2FB865DA00D242D7",
+            "name" : "BankAppTests"
+          }
+        }
+      ]
+    },
+    {
+      "id" : "A1B2C3D4-0002-4000-8000-000000000002",
+      "name" : "UI Tests",
+      "options" : {
+        "targetForVariableExpansion" : {
+          "containerPath" : "container:BankApp.xcodeproj",
+          "identifier" : "999BA88A2FB865D900D242D7",
+          "name" : "BankApp"
+        }
+      },
+      "testTargets" : [
+        {
+          "parallelizable" : false,
+          "target" : {
+            "containerPath" : "container:BankApp.xcodeproj",
+            "identifier" : "999BA8A62FB865DA00D242D7",
+            "name" : "BankAppUITests"
+          }
+        }
+      ]
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BankApp.xcodeproj",
+      "identifier" : "999BA88A2FB865D900D242D7",
+      "name" : "BankApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:BankApp.xcodeproj",
+        "identifier" : "999BA89C2FB865DA00D242D7",
+        "name" : "BankAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:BankApp.xcodeproj",
+        "identifier" : "999BA8A62FB865DA00D242D7",
+        "name" : "BankAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
