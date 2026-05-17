@@ -27,11 +27,8 @@ xcodebuild test \
   -maximum-parallel-testing-workers 1 \
   -resultBundlePath TestResults-Unit.xcresult
 
-echo "=== 2/4 Coverage check (>= ${COVERAGE_THRESHOLD:-90}%) ==="
-./ci/check-coverage.sh TestResults-Unit.xcresult
-
-echo "=== 3/4 UI tests (Test Plan: UI Tests) ==="
-rm -rf TestResults-UI.xcresult
+echo "=== 2/4 UI tests (Test Plan: UI Tests) ==="
+rm -rf TestResults-UI.xcresult TestResults-Merged.xcresult
 xcodebuild test \
   -project "$PROJECT" \
   -scheme "$SCHEME" \
@@ -41,7 +38,11 @@ xcodebuild test \
   -destination "${DESTINATION}" \
   -configuration Debug \
   CODE_SIGNING_ALLOWED=NO \
+  -enableCodeCoverage YES \
   -resultBundlePath TestResults-UI.xcresult
+
+echo "=== 3/4 Coverage check (unit + UI, >= ${COVERAGE_THRESHOLD:-90}%) ==="
+./ci/check-coverage.sh TestResults-Unit.xcresult TestResults-UI.xcresult
 
 echo "=== 4/4 Release build (only after tests passed) ==="
 xcodebuild build \

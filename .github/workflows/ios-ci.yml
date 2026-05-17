@@ -7,7 +7,7 @@ name: iOS CI
 
 on:
   push:
-    branches: [dev]
+    branches: [main, master, dev]
   pull_request:
     branches: [main, master]
   workflow_dispatch:
@@ -73,9 +73,6 @@ jobs:
             -maximum-parallel-testing-workers 1 \
             -resultBundlePath TestResults-Unit.xcresult
 
-      - name: Verify code coverage
-        run: ./ci/check-coverage.sh TestResults-Unit.xcresult
-
       - name: Run UI Tests (Test Plan — UI Tests)
         run: |
           rm -rf TestResults-UI.xcresult
@@ -88,7 +85,11 @@ jobs:
             -destination "platform=iOS Simulator,name=${{ steps.simulator.outputs.device }}" \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
+            -enableCodeCoverage YES \
             -resultBundlePath TestResults-UI.xcresult
+
+      - name: Verify code coverage (unit + UI)
+        run: ./ci/check-coverage.sh TestResults-Unit.xcresult TestResults-UI.xcresult
 
       - name: Upload test results
         if: always()
@@ -98,6 +99,7 @@ jobs:
           path: |
             BankApp/TestResults-Unit.xcresult
             BankApp/TestResults-UI.xcresult
+            BankApp/TestResults-Merged.xcresult
           if-no-files-found: ignore
 
   build:
