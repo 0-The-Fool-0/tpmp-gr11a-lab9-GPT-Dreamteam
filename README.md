@@ -1,57 +1,58 @@
-# tpmp-gr11a-lab9-GPT-Dreamteam
+## Project Name
 
-Мобильное банковское приложение **BankApp** (iOS, SwiftUI + Core Data) — лабораторная работа 9.
+**BankApp** — мобильное банковское приложение (лабораторная работа 9, группа 11А).
 
-## Соответствие заданию (п. 5–6)
+Репозиторий: [tpmp-gr11a-lab9-GPT-Dreamteam](https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam)
 
-| Требование | Реализация |
-|------------|------------|
-| План тестирования (Test Plan) | [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md), Xcode Test Plan [`BankApp/BankApp.xctestplan`](BankApp/BankApp.xctestplan) |
-| Unit-тесты | `BankApp/BankAppTests/` (Swift Testing) |
-| UI-тесты | `BankApp/BankAppUITests/` (XCTest / XCUITest) |
-| CI GitHub Actions | [`.github/workflows/ios-ci.yml`](.github/workflows/ios-ci.yml) |
-| **Тесты до сборки** | Job `test` → job `build` (`needs: test`) |
-| Покрытие ~90% | `BankApp/ci/check-coverage.sh` |
+## Description
 
-### CI/CD (по учебным материалам)
+BankApp — клиентское iOS-приложение для банка на SwiftUI и Core Data (SQLite). Пользователь входит по логину и паролю, просматривает активные и заблокированные счета (закрытые скрыты), курсы валют USD/EUR и карту отделений с поиском ближайшего филиала по геолокации. Интерфейс полностью локализован на русский язык; данные хранятся локально и при первом запуске заполняются демо-набором. Проект включает unit- и UI-тесты, проверку покрытия кода (≥ 90%) и CI в GitHub Actions (сначала тесты, затем сборка). Подробная техническая документация — в [Wiki](https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki) и на [GitHub Pages](https://0-The-Fool-0.github.io/tpmp-gr11a-lab9-GPT-Dreamteam/) ([`docs/`](docs/)).
 
-Настройка следует рекомендациям:
+## Installation
 
-- [GitHub Actions for iOS projects](https://sarunw.com/posts/github-actions-for-ios-projects/) — `macos-latest`, `xcodebuild`, симулятор, кэш DerivedData  
-- [iOS CI/CD with GitHub Actions](https://medium.com/thefork/ios-ci-cd-with-github-actions-e4504228c9d) — разделение test / build  
-- [Apple-Actions/Example-iOS](https://github.com/Apple-Actions/Example-iOS) — checkout, выбор Xcode, scheme + test  
-- [GitHub Actions CI for Swift](https://medium.com/rosberryapps/github-actions-ci-for-swift-projects-c129baceed1a) — `xcodebuild test` / `build`  
-- [Building an Objective-C or Swift Project (Travis)](https://docs.travis-ci.com/user/languages/objective-c/) — аналогичная последовательность для Xcode-проектов  
+1. Убедитесь, что установлены **macOS**, **Xcode 15+** (с iOS Simulator) и **Git**.
+2. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam.git
+   cd tpmp-gr11a-lab9-GPT-Dreamteam
+   ```
+3. Откройте проект в Xcode:
+   ```bash
+   open BankApp/BankApp.xcodeproj
+   ```
+4. В Xcode выберите схему **BankApp** и симулятор (например, **iPhone 16**), затем соберите проект (**⌘B**).
+5. *(Опционально)* Запуск тестов и сборки из терминала (как в CI):
+   ```bash
+   cd BankApp
+   ./ci/build-and-test.sh
+   ```
 
-## Структура
+**Требования:** iOS 16.0+, только macOS для сборки и запуска.
 
-- `BankApp/` — Xcode-проект  
-- `BankApp/BankAppTests/` — unit-тесты  
-- `BankApp/BankAppUITests/` — UI-тесты  
-- `docs/TEST_PLAN.md` — план тестирования  
-- `.github/workflows/ios-ci.yml` — непрерывная интеграция  
+## Usage
 
-## GitHub Actions (порядок шагов)
+1. Запустите приложение в симуляторе или на устройстве (**⌘R** в Xcode).
+2. На экране входа введите демо-учётные данные:
 
-```
-test (unit → coverage ≥90% → UI)  →  build (Release, только если test успешен)
-```
+   | Логин | Пароль |
+   |-------|--------|
+   | `elena.kuznetsova` | `demo1234` |
 
-Триггеры: `push` / `pull_request` в `main`/`master`, ручной запуск **Actions → iOS CI → Run workflow**.
+3. После входа откроется **главный экран**: приветствие, сводка по счетам (сумма по активным счетам), курсы валют и переходы к разделам.
+4. Вкладка **«Счета»** — список из 5 видимых счетов (активные и заблокированные; закрытые не показываются).
+5. Вкладка **«Отделения»** — карта филиалов; нажмите **«Найти ближайшее»** и разрешите геолокацию, чтобы выделить ближайшее отделение.
+6. Для выхода используйте кнопку выхода на главном экране (сессия сбрасывается).
 
-## Локальный запуск (macOS + Xcode)
+Для просмотра покрытия тестами: **Product → Test (⌘U)** → **Report navigator → Coverage**.
 
-```bash
-cd BankApp
-./ci/build-and-test.sh
-```
+## Contributing
 
-## Демо-учётная запись
+Проект выполнен командой **GPT Dreamteam** (группа 11А, БГУ, ФПМИ):
 
-| Логин | Пароль |
-|-------|--------|
-| `elena.kuznetsova` | `demo1234` |
+| Участник | Роль | Реализованные задачи |
+|----------|------|----------------------|
+| **Гердий Егор** | Разработчик-дизайнер | UI на SwiftUI (Login, Home, Accounts, Branches), компоненты (`AccountCardView`, `LabeledTextField` и др.), стили и брендинг, интеграция экранов с ViewModel |
+| **Борисовец Андрей** | Разработчик-тестировщик | Unit- и UI-тесты (`BankAppTests`, `BankAppUITests`), [план тестирования](docs/TEST_PLAN.md), Xcode Test Plan, скрипты CI и проверка покрытия ≥ 90%, workflow [`.github/workflows/ios-ci.yml`](.github/workflows/ios-ci.yml) |
+| **Поварго София** | Разработчик — project manager | Сбор и описание требований (FR/NFR), планирование этапов и приоритизация MoSCoW, [GitHub Wiki](https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki) и документация в [`docs/`](docs/) |
 
-## Покрытие
-
-Цель — **≥ 90%** строк target `BankApp`. Отчёт в Xcode: **Report navigator → Coverage** после ⌘U.
+Предложения и исправления — через Issues и Pull Request в репозиторий.

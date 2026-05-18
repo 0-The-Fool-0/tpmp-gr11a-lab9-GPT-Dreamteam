@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home — BankApp Wiki</title>
+  <link rel="stylesheet" href="assets/wiki.css">
+</head>
+<body>
+  <header class="wiki-header">
+    <h1><a href="index.html">tpmp-gr11a-lab9-GPT-Dreamteam</a></h1>
+    <p>Документация BankApp · <a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">GitHub</a></p>
+  </header>
+  <div class="wiki-layout">
+    <aside class="wiki-sidebar">
+      <nav>
+        <h2>Wiki</h2>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="use-case-diagram.html">1. Use Case Diagram</a></li>
+          <li><a href="class-diagram.html">2. Class Diagram</a></li>
+          <li><a href="sequence-diagrams.html">3. Sequence Diagrams</a></li>
+          <li><a href="package-diagram.html">4. Package Diagram</a></li>
+          <li><a href="deployment-diagrams.html">5. Deployment Diagrams</a></li>
+          <li><a href="database-schema.html">6. Database Schema</a></li>
+          <li><a href="requirements-and-planning.html">7. Requirements and Planning</a></li>
+        </ul>
+        <h2>Проект</h2>
+        <ul>
+          <li><a href="test-plan.html">Test Plan</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">Репозиторий</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki">Wiki на GitHub</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="wiki-content">
+      <h1>Документация BankApp</h1>
+      <p>Разработка мобильного приложения для банка, предоставляющего клиентам следующие возможности:</p>
+      <ul>
+        <li>Аутентификация по логину/паролю</li>
+        <li>Просмотр всех активных и заблокированных банковских счетов (закрытые счета не отображаются)</li>
+        <li>Просмотр курсов валют</li>
+        <li>Поиск ближайших отделений банка на карте</li>
+        <li>Локализация на русский язык</li>
+      </ul>
+
+      <h2>Функциональные требования</h2>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Требование</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>FR-01</td><td>Приложение должно обеспечивать аутентификацию пользователя по логину и паролю</td></tr>
+          <tr><td>FR-02</td><td>После успешного входа пользователь переходит в главное меню</td></tr>
+          <tr><td>FR-03</td><td>Пользователь может просмотреть список всех своих счетов (активных и заблокированных)</td></tr>
+          <tr><td>FR-04</td><td>Закрытые счета не отображаются в списке</td></tr>
+          <tr><td>FR-05</td><td>Система поддерживает типы счетов: текущий, сберегательный, кредитный, карт-счет</td></tr>
+          <tr><td>FR-06</td><td>Карт-счет может быть: зарплатным, сберегательным, кредитным</td></tr>
+          <tr><td>FR-07</td><td>Для зарплатных карт отображается информация об овердрафте</td></tr>
+          <tr><td>FR-08</td><td>Пользователь может просматривать текущие курсы валют</td></tr>
+          <tr><td>FR-09</td><td>Пользователь может просматривать карту с филиалами отделений</td></tr>
+          <tr><td>FR-10</td><td>Пользователь может найти ближайшее отделение относительно своего местоположения</td></tr>
+          <tr><td>FR-11</td><td>Все данные хранятся в SQLite базе данных</td></tr>
+          <tr><td>FR-12</td><td>При первом запуске база данных заполняется тестовыми данными</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Нефункциональные требования</h2>
+      <ul>
+        <li><strong>Производительность:</strong> время отклика UI не более 300 мс</li>
+        <li><strong>Надёжность:</strong> корректная обработка ошибок сети и геолокации</li>
+        <li><strong>Платформа:</strong> iOS 16.0+</li>
+        <li><strong>Архитектура:</strong> MVVM + Coordinator (Clean Swift)</li>
+        <li><strong>Локализация:</strong> русский язык</li>
+      </ul>
+
+      <h2>Навигация</h2>
+      <table>
+        <thead>
+          <tr><th>Раздел</th><th>Описание</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><a href="use-case-diagram.html">1. Use Case Diagram</a></td><td>Диаграммы вариантов использования</td></tr>
+          <tr><td><a href="class-diagram.html">2. Class Diagram</a></td><td>Диаграммы классов</td></tr>
+          <tr><td><a href="sequence-diagrams.html">3. Sequence Diagrams</a></td><td>Диаграммы последовательности</td></tr>
+          <tr><td><a href="package-diagram.html">4. Package Diagram</a></td><td>Диаграммы пакетов</td></tr>
+          <tr><td><a href="deployment-diagrams.html">5. Deployment Diagrams</a></td><td>Диаграммы развертывания</td></tr>
+          <tr><td><a href="database-schema.html">6. Database Schema</a></td><td>Физическая модель базы данных</td></tr>
+          <tr><td><a href="requirements-and-planning.html">7. Requirements and Planning</a></td><td>Требования, User Stories, задачи</td></tr>
+          <tr><td><a href="glossary.html">Glossary</a></td><td>Глоссарий терминов</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Команда</h2>
+      <table>
+        <thead>
+          <tr><th>Роль</th><th>Имя</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Разработчик-дизайнер</td><td>Гердий Егор</td></tr>
+          <tr><td>Разработчик-тестировщик</td><td>Борисовец Андрей</td></tr>
+          <tr><td>Разработчик-проджект менеджер</td><td>Поварго София</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Репозиторий</h2>
+      <p><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam</a></p>
+
+      <footer class="wiki-footer">
+        Статическая копия <a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki">GitHub Wiki</a> для GitHub Pages.
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

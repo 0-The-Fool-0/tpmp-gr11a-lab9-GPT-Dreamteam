@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6. Database Schema — BankApp Wiki</title>
+  <link rel="stylesheet" href="assets/wiki.css">
+</head>
+<body>
+  <header class="wiki-header">
+    <h1><a href="index.html">tpmp-gr11a-lab9-GPT-Dreamteam</a></h1>
+    <p>Документация BankApp · <a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">GitHub</a></p>
+  </header>
+  <div class="wiki-layout">
+    <aside class="wiki-sidebar">
+      <nav>
+        <h2>Wiki</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="use-case-diagram.html">1. Use Case Diagram</a></li>
+          <li><a href="class-diagram.html">2. Class Diagram</a></li>
+          <li><a href="sequence-diagrams.html">3. Sequence Diagrams</a></li>
+          <li><a href="package-diagram.html">4. Package Diagram</a></li>
+          <li><a href="deployment-diagrams.html">5. Deployment Diagrams</a></li>
+          <li><a href="database-schema.html" class="active">6. Database Schema</a></li>
+          <li><a href="requirements-and-planning.html">7. Requirements and Planning</a></li>
+        </ul>
+        <h2>Проект</h2>
+        <ul>
+          <li><a href="test-plan.html">Test Plan</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">Репозиторий</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki">Wiki на GitHub</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="wiki-content">
+
+      <h1>6. Database Schema</h1>
+      <p>
+        <a href="https://github.com/user-attachments/assets/fe28bc18-ea04-4b0f-b876-2e0759940226">
+          <img src="https://github.com/user-attachments/assets/fe28bc18-ea04-4b0f-b876-2e0759940226" alt="База данных">
+        </a>
+      </p>
+      <table>
+        <thead><tr><th>Таблица</th><th>Описание</th><th>Основные поля</th></tr></thead>
+        <tbody>
+          <tr><td>ZUSER</td><td>Пользователи системы</td><td>ZID (UUID), ZLOGIN, ZPASSWORD, ZDISPLAYNAME</td></tr>
+          <tr><td>ZACCOUNT</td><td>Банковские счета</td><td>ZACCOUNTNUMBER, ZTYPE, ZSTATUS, ZBALANCE, ZOVERDRAFTLIMIT, ZSORTORDER</td></tr>
+          <tr><td>ZEXCHANGERATE</td><td>Курсы валют</td><td>ZCURRENCYCODE, ZBUYRATE, ZUPDATEDAT</td></tr>
+          <tr><td>ZBRANCH</td><td>Филиалы банка</td><td>ZNAMEKEY, ZADDRESS, ZLATITUDE, ZLONGITUDE</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Связи:</strong> ZACCOUNT.ZUSER → ZUSER.Z_PK (внешний ключ)</p>
+      <p><strong>Хранимые типы данных:</strong></p>
+      <ul>
+        <li>INTEGER — целые числа</li>
+        <li>VARCHAR — строки</li>
+        <li>DOUBLE — числа с плавающей точкой</li>
+        <li>BLOB — бинарные данные</li>
+        <li>TIMESTAMP — дата/время</li>
+      </ul>
+
+      <footer class="wiki-footer"><a href="index.html">← Home</a></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2. Class Diagram — BankApp Wiki</title>
+  <link rel="stylesheet" href="assets/wiki.css">
+</head>
+<body>
+  <header class="wiki-header">
+    <h1><a href="index.html">tpmp-gr11a-lab9-GPT-Dreamteam</a></h1>
+    <p>Документация BankApp · <a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">GitHub</a></p>
+  </header>
+  <div class="wiki-layout">
+    <aside class="wiki-sidebar">
+      <nav>
+        <h2>Wiki</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="use-case-diagram.html">1. Use Case Diagram</a></li>
+          <li><a href="class-diagram.html" class="active">2. Class Diagram</a></li>
+          <li><a href="sequence-diagrams.html">3. Sequence Diagrams</a></li>
+          <li><a href="package-diagram.html">4. Package Diagram</a></li>
+          <li><a href="deployment-diagrams.html">5. Deployment Diagrams</a></li>
+          <li><a href="database-schema.html">6. Database Schema</a></li>
+          <li><a href="requirements-and-planning.html">7. Requirements and Planning</a></li>
+        </ul>
+        <h2>Проект</h2>
+        <ul>
+          <li><a href="test-plan.html">Test Plan</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">Репозиторий</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki">Wiki на GitHub</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="wiki-content">
+
+      <h1>2. Class Diagram</h1>
+      <p>
+        <a href="https://github.com/user-attachments/assets/c095c434-d01f-4fd5-856c-dc64822245e1">
+          <img src="https://github.com/user-attachments/assets/c095c434-d01f-4fd5-856c-dc64822245e1" alt="Диаграмма классов">
+        </a>
+      </p>
+      <table>
+        <thead><tr><th>Группа</th><th>Классы</th><th>Ответственность</th></tr></thead>
+        <tbody>
+          <tr><td>Сервисы</td><td>AuthService, AccountService, ExchangeRateService, BranchService</td><td>Бизнес-логика, работа с Core Data</td></tr>
+          <tr><td>ViewModel</td><td>HomeViewModel, AccountsViewModel, BranchesViewModel, LoginViewModel</td><td>Подготовка данных для UI, управление состоянием</td></tr>
+          <tr><td>Core Data</td><td>User, Account, ExchangeRate, Branch</td><td>Хранение данных в SQLite</td></tr>
+          <tr><td>Модели</td><td>UserSession, AccountItem, RateItem, BranchItem</td><td>Value-типы для передачи данных</td></tr>
+          <tr><td>Enum</td><td>AccountType, CardSubtype, AccountStatus</td><td>Типы и статусы счетов</td></tr>
+        </tbody>
+      </table>
+
+      <footer class="wiki-footer"><a href="index.html">← Home</a></footer>
+    </main>
+  </div>
+</body>
+</html>

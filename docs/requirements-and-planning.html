@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>7. Requirements and Planning — BankApp Wiki</title>
+  <link rel="stylesheet" href="assets/wiki.css">
+</head>
+<body>
+  <header class="wiki-header">
+    <h1><a href="index.html">tpmp-gr11a-lab9-GPT-Dreamteam</a></h1>
+    <p>Документация BankApp · <a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">GitHub</a></p>
+  </header>
+  <div class="wiki-layout">
+    <aside class="wiki-sidebar">
+      <nav>
+        <h2>Wiki</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="glossary.html">Glossary</a></li>
+          <li><a href="use-case-diagram.html">1. Use Case Diagram</a></li>
+          <li><a href="class-diagram.html">2. Class Diagram</a></li>
+          <li><a href="sequence-diagrams.html">3. Sequence Diagrams</a></li>
+          <li><a href="package-diagram.html">4. Package Diagram</a></li>
+          <li><a href="deployment-diagrams.html">5. Deployment Diagrams</a></li>
+          <li><a href="database-schema.html">6. Database Schema</a></li>
+          <li><a href="requirements-and-planning.html" class="active">7. Requirements and Planning</a></li>
+        </ul>
+        <h2>Проект</h2>
+        <ul>
+          <li><a href="test-plan.html">Test Plan</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam">Репозиторий</a></li>
+          <li><a href="https://github.com/0-The-Fool-0/tpmp-gr11a-lab9-GPT-Dreamteam/wiki">Wiki на GitHub</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="wiki-content">
+
+      <h1>7. Requirements and Planning</h1>
+      <p>
+        <a href="https://github.com/user-attachments/assets/39de9839-9b8c-4c3b-95e9-545fb9d21b2a">
+          <img src="https://github.com/user-attachments/assets/39de9839-9b8c-4c3b-95e9-545fb9d21b2a" alt="Схема компонентов">
+        </a>
+      </p>
+      <h2>Назначение раздела</h2>
+      <p>Раздел определяет полный перечень функциональных и нефункциональных требований, а также план реализации с оценкой сроков, трудозатрат и рисков.</p>
+      <h2>1. Функциональные требования (27)</h2>
+      <table>
+        <thead><tr><th>Категория</th><th>Ключевые требования</th></tr></thead>
+        <tbody>
+          <tr><td>Аутентификация</td><td>Вход по логину/паролю, проверка по БД, выход</td></tr>
+          <tr><td>Просмотр счетов</td><td>Активные/заблокированные, 4 типа счетов, овердрафт для зарплатных карт</td></tr>
+          <tr><td>Курсы валют</td><td>USD/EUR на главном экране</td></tr>
+          <tr><td>Карта отделений</td><td>Интерактивная карта, поиск ближайшего через геолокацию</td></tr>
+          <tr><td>Управление данными</td><td>SQLite, seed при первом запуске</td></tr>
+        </tbody>
+      </table>
+      <h2>2. Нефункциональные требования (17)</h2>
+      <table>
+        <thead><tr><th>Категория</th><th>Целевые показатели</th></tr></thead>
+        <tbody>
+          <tr><td>Производительность</td><td>Запуск &lt; 3 сек, отклик UI &lt; 300 мс</td></tr>
+          <tr><td>Надёжность</td><td>Нет crash при ошибках геолокации</td></tr>
+          <tr><td>Платформа</td><td>iOS 16.0+, iPhone, тёмная/светлая тема</td></tr>
+          <tr><td>Локализация</td><td>Русский язык</td></tr>
+        </tbody>
+      </table>
+      <h2>3. План реализации (11 этапов)</h2>
+      <table>
+        <thead><tr><th>Этап</th><th>Длительность</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>Настройка Core Data</td><td>1 день</td><td>Модели, PersistenceController</td></tr>
+          <tr><td>Слой сервисов</td><td>1 день</td><td>AuthService, AccountService и др.</td></tr>
+          <tr><td>ViewModel слой</td><td>1 день</td><td>4 ViewModel класса</td></tr>
+          <tr><td>UI компоненты</td><td>1 день</td><td>Кастомные SwiftUI компоненты</td></tr>
+          <tr><td>Аутентификация</td><td>1 день</td><td>LoginView + SessionStore</td></tr>
+          <tr><td>Главный экран</td><td>0.5 дня</td><td>HomeView</td></tr>
+          <tr><td>Список счетов</td><td>0.5 дня</td><td>AccountsListView</td></tr>
+          <tr><td>Карта отделений</td><td>1.5 дня</td><td>BranchesMapView</td></tr>
+          <tr><td>Навигация и DI</td><td>1 день</td><td>RootView, MainTabView</td></tr>
+          <tr><td>Тестирование</td><td>0.5 дня</td><td>Модульное и UI-тестирование</td></tr>
+          <tr><td>Документация</td><td>1 день</td><td>Техническая документация</td></tr>
+        </tbody>
+      </table>
+      <h2>4. Приоритезация MoSCoW</h2>
+      <table>
+        <thead><tr><th>Приоритет</th><th>Количество</th><th>Примеры</th></tr></thead>
+        <tbody>
+          <tr><td>Must have</td><td>15</td><td>Вход, список счетов, Core Data</td></tr>
+          <tr><td>Should have</td><td>8</td><td>Выход, овердрафт, геолокация</td></tr>
+          <tr><td>Could have</td><td>6</td><td>Курсы валют, список филиалов</td></tr>
+          <tr><td>Won't have</td><td>3</td><td>Хеширование паролей, шифрование сессии</td></tr>
+        </tbody>
+      </table>
+      <h2>5. Риски и митигация</h2>
+      <table>
+        <thead><tr><th>Риск</th><th>Митигация</th></tr></thead>
+        <tbody>
+          <tr><td>Сложности с Core Location</td><td>Тестирование на реальном устройстве</td></tr>
+          <tr><td>Требования к безопасности</td><td>Абстракция AuthService</td></tr>
+          <tr><td>Нехватка времени</td><td>Параллельная документация</td></tr>
+        </tbody>
+      </table>
+      <h2>6. Критерии приёмки</h2>
+      <ul>
+        <li>Вход с корректными данными → главный экран</li>
+        <li>Только активные/заблокированные счета в списке</li>
+        <li>Выделение ближайшего отделения на карте</li>
+        <li>Автозаполнение БД при первом запуске</li>
+        <li>Отсутствие crash при штатном использовании</li>
+      </ul>
+      <h2>Итоговая оценка</h2>
+      <table>
+        <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td>Общая длительность</td><td>7 дней</td></tr>
+          <tr><td>Трудозатраты</td><td>40 часов</td></tr>
+          <tr><td>Оценочная стоимость</td><td>3 600 у.е.</td></tr>
+          <tr><td>Всего требований</td><td>44 (27 + 17)</td></tr>
+        </tbody>
+      </table>
+
+      <footer class="wiki-footer"><a href="index.html">← Home</a></footer>
+    </main>
+  </div>
+</body>
+</html>
